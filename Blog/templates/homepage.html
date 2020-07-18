@@ -38,10 +38,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="/">Home</a>
+              <a class="nav-link" href="{% url 'homepage' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/">Sample Post</a>
+              <a class="nav-link" href="{% url 'blog' %}">Blog Post</a>
+            </li>
+              <li class="nav-item">
+              <a class="nav-link" href="{% url 'create' %}">New Story</a>
             </li>
           </ul>
         </div>
