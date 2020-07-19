@@ -1,9 +1,7 @@
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-
-
-
+from django.template import loader
 
 
 def homepage(request):
