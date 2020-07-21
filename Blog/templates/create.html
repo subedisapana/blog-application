@@ -7,22 +7,30 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="icon" type="image/png" href="{% static 'Images/blog.jpg' %}"/>
+ <!-- Custom styles for this template -->
+    <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
+
+
+
+	<link rel="icon" type="image/png" href="{% static '' %}"/>
 
 	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
-
 	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 </head>
 <body>
 
+
+
+<!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'blog' %}">BACK</a>
+      </div>
+    </nav>
+
+<!-- form  -->
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
@@ -31,43 +39,63 @@
 					Create Your Story
 				</span>
 
-
-				<div class="wrap-input100 validate-input" data-validate="Name is required">
-					<label class="label-input100" for="name">Full name</label>
-					<input id="name" class="input100" type="text" name="name" placeholder="Enter your name">
+                <div class="wrap-input100 validate-input" data-validate = "required">
+					<label class="label-input100" for="id_title">Title</label>
+					<input id="id_title" class="input100" maxlength= "250" type="text" name="title" placeholder="Enter the title of your story.">
 					<span class="focus-input100"></span>
 				</div>
 
-
-				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-					<label class="label-input100" for="email">Email Address</label>
-					<input id="email" class="input100" type="text" name="email" placeholder="Enter your email address">
+                <div class="wrap-input100 validate-input" data-validate = "required">
+					<label class="label-input100" for="id_subtitle">Subtitle</label>
+					<input id="id_subtitle" class="input100" type="text" name="subtitle" placeholder=" Enter short description">
 					<span class="focus-input100"></span>
 				</div>
 
-                <div class="wrap-input100 validate-input" data-validate = "Title is required">
-					<label class="label-input100" for="title">Title</label>
-					<input id="title" class="input100" type="text" name="email" placeholder="Enter the title of your story.">
-					<span class="focus-input100"></span>
-				</div>
+              <div class="wrap-input100 validate-input" data-validate = "required">
+                   <label class="label-input100" for="id_slug">Slug</label>
+                   <input id="id_slug" class="input100" type="text" name="subtitle" placeholder=" ">
+                   <span class="focus-input100"></span>
+              </div>
 
-                <div class="wrap-input100 validate-input" data-validate = "Description">
-					<label class="label-input100" for="description">Subtitle</label>
-					<input id="description" class="input100" type="text" name="description" placeholder=" Enter short description">
-					<span class="focus-input100"></span>
-				</div>
+              <div class="wrap-input100 validate-input" data-validate = "required">
+					<label class="label-input100" for="id_author">Author</label>
+					<!--<input id="id_author" class="input100" type="text" name="author" placeholder=" Enter your name">-->
+                    <select>
+                      <option value="" selected>---------</option>
+                      <option value="1">admin</option>
+                    </select>
+
+                  <a class="related-widget-wrapper-link change-related" id="change_id_author"
+                      data-href-template="/admin/auth/user/__fk__/change/?_to_field=id&amp;_popup=1"
+                      title="Change selected user"><img src="/static/admin/img/icon-changelink.svg" alt="Change"></a><a class="related-widget-wrapper-link add-related" id="add_id_author"
+                      href="/admin/auth/user/add/?_to_field=id&amp;_popup=1"
+                      title="Add another user"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+
+                  <span class="focus-input100"></span>
+              </div>
 
 
 
-				<div class="wrap-input100 validate-input" data-validate = "Message is required">
-					<label class="label-input100" for="message">Message</label>
+				<div class="wrap-input100 validate-input" data-validate = "required">
+					<label class="label-input100" for="message">Content</label>
 					<textarea id="message" class="input100" name="message" placeholder="Tell your story"></textarea>
 					<span class="focus-input100"></span>
 				</div>
 
+
+
+                <div class="wrap-input100 validate-input" data-validate = "required">
+					<label class="label-input100" for="id_author">Author</label>
+					<!--<input id="id_author" class="input100" type="text" name="author" placeholder=" Enter your name">-->
+                    <select>
+                        <option value="Published">Published</option>
+                        <option value="Draft" selected>Draft</option>
+                    </select>
+                </div>
+
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
-						Send
+						Save
 					</button>
 				</div>
 
@@ -86,21 +114,16 @@
 				</div>
 			</form>
 
-			<div class="contact100-more flex-col-c-m" style="background-image: url('images/bg-01.jpg');">
+			<div class="contact100-more flex-col-c-m" style="background-image: url({% static 'Images/bg-01.jpg'%})">
 			</div>
+
 		</div>
 	</div>
 
 
 	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
-	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
 	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
-
-    <script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
-	<!--<script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
-	<script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>-->
 	<script src="{% static 'js/main.js' %}"></script>
 
 </body>

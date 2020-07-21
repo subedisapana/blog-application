@@ -3,14 +3,12 @@ from django.views import generic
 from .models import Post
 
 
-#def homepage(request):
- #   return render(request, 'homepage.html',)
+def homepage(request):
+    return render(request, 'homepage.html',)
 
-#def blog(request):
-#    return render(request, 'blog.html', )
 
-#def create(request):
-#    return render(request, 'create.html', )
+def create(request):
+    return render(request, 'create.html', )
 
 
 class PostList(generic.ListView):
