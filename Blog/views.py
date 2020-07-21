@@ -1,18 +1,24 @@
-
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from django.template import loader
+from django.views import generic
+from .models import Post
 
 
-def homepage(request):
-    return render(request, 'homepage.html', {'status': ''})
+#def homepage(request):
+ #   return render(request, 'homepage.html',)
+
+#def blog(request):
+#    return render(request, 'blog.html', )
+
+#def create(request):
+#    return render(request, 'create.html', )
 
 
-def blog(request):
-    return render(request, 'blog.html', {'status': ''})
+class PostList(generic.ListView):
+    queryset = Post.objects.filter(status='Published').order_by('-created')
+    template_name = 'blog.html'
 
 
-def create(request):
-    return render(request, 'create.html', {'status': ''})
-
+class PostDetail(generic.DetailView):
+    model = Post
+    template_name = 'blogon_extend.html'
 
