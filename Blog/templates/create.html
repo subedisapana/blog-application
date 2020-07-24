@@ -34,64 +34,13 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form">
+			<form class="contact100-form validate-form" method="post" action="/form/">
+              {% csrf_token %}
 				<span class="contact100-form-title">
 					Create Your Story
 				</span>
 
-                <div class="wrap-input100 validate-input" data-validate = "required">
-					<label class="label-input100" for="id_title">Title</label>
-					<input id="id_title" class="input100" maxlength= "250" type="text" name="title" placeholder="Enter the title of your story.">
-					<span class="focus-input100"></span>
-				</div>
-
-                <div class="wrap-input100 validate-input" data-validate = "required">
-					<label class="label-input100" for="id_subtitle">Subtitle</label>
-					<input id="id_subtitle" class="input100" type="text" name="subtitle" placeholder=" Enter short description">
-					<span class="focus-input100"></span>
-				</div>
-
-              <div class="wrap-input100 validate-input" data-validate = "required">
-                   <label class="label-input100" for="id_slug">Slug</label>
-                   <input id="id_slug" class="input100" type="text" name="subtitle" placeholder=" ">
-                   <span class="focus-input100"></span>
-              </div>
-
-              <div class="wrap-input100 validate-input" data-validate = "required">
-					<label class="label-input100" for="id_author">Author</label>
-					<!--<input id="id_author" class="input100" type="text" name="author" placeholder=" Enter your name">-->
-                    <select>
-                      <option value="" selected>---------</option>
-                      <option value="1">admin</option>
-                    </select>
-
-                  <a class="related-widget-wrapper-link change-related" id="change_id_author"
-                      data-href-template="/admin/auth/user/__fk__/change/?_to_field=id&amp;_popup=1"
-                      title="Change selected user"><img src="/static/admin/img/icon-changelink.svg" alt="Change"></a><a class="related-widget-wrapper-link add-related" id="add_id_author"
-                      href="/admin/auth/user/add/?_to_field=id&amp;_popup=1"
-                      title="Add another user"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
-
-                  <span class="focus-input100"></span>
-              </div>
-
-
-
-				<div class="wrap-input100 validate-input" data-validate = "required">
-					<label class="label-input100" for="message">Content</label>
-					<textarea id="message" class="input100" name="message" placeholder="Tell your story"></textarea>
-					<span class="focus-input100"></span>
-				</div>
-
-
-
-                <div class="wrap-input100 validate-input" data-validate = "required">
-					<label class="label-input100" for="id_author">Author</label>
-					<!--<input id="id_author" class="input100" type="text" name="author" placeholder=" Enter your name">-->
-                    <select>
-                        <option value="Published">Published</option>
-                        <option value="Draft" selected>Draft</option>
-                    </select>
-                </div>
+               {{ form }}
 
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
@@ -128,5 +77,3 @@
 
 </body>
 </html>
-
-

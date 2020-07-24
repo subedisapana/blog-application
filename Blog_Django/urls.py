@@ -19,10 +19,11 @@ from Blog import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('', views.index, name='index'),
+    # path('login/', views.login_view, name='login'),
+
     path('', views.homepage, name='homepage'),
-    path('create/', views.create, name='create'),
+    path('form/', views.blog_form, name='blog_form'),
     path('blog/', include('Blog.urls')),
-
-
 
 ]

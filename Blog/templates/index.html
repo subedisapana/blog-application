@@ -1,0 +1,20 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href={% static 'css/index.css' %}>
+</head>
+<body onload="pagestartup();">
+<h2>{{ status }}</h2>
+<div class="content">
+    <div class="title">CREATE YOUR OWN STORY</div>
+    <div class="title">SIGN IN</div>
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <input id="email" name="email" type="email" placeholder="E-mail"/>
+        <input id="password" name="password" type="password" placeholder="Password"/>
+        <button type="submit" class="sign-in-button" id="signin">Sign In</button>
+    </form>
+</div>
+<script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
