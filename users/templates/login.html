@@ -10,10 +10,11 @@
     <div class="title">SIGN IN</div>
     <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
-        <input id="email" name="email" type="email" placeholder="E-mail"/>
-        <input id="password" name="password" type="password" placeholder="Password"/>
-        <button type="submit" class="sign-in-button" id="signin">Sign In</button>
+        {{ form }}
     </form>
+    <div>
+        <p>Haven't registered?<a class="ml-2" href="{% url 'register'  %}">Sign Up</a></p>
+    </div>
 </div>
 <script src="{% static 'js/index.js' %}"></script>
 </body>

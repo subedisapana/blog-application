@@ -1,0 +1,21 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href={% static 'css/index.css' %}>
+</head>
+<body onload="pagestartup();">
+<h2>{{ status }}</h2>
+<div class="content">
+    <div class="title">Registration</div>
+    <div class="title">SIGN Up</div>
+    <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+    </form>
+    <div>
+        <p>Already registered?<a class="ml-2" href="{% url 'login'  %}">Sign In</a></p>
+    </div>
+</div>
+<script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
