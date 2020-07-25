@@ -1,24 +1,19 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from .models import Post
 from .form import BlogForm
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import (ListView, DetailView, CreateView, UpdateView, DeleteView)
 
 
-def index(request):
-    return render(request, 'index.html',)
-
-
 def homepage(request):
     return render(request, 'homepage.html',)
-
-
 
 # -------blog view--------------------------------------------------
 
@@ -26,6 +21,10 @@ def homepage(request):
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status='Published').order_by('-created')
     template_name = 'blog.html'
+    model = Post
+    context_object_name = 'post_list'
+    paginate_by = 2
+    ordering = ['-created']
 
 
 class PostDetail(generic.DetailView):
@@ -45,3 +44,5 @@ def blog_form(request):
             return HttpResponse("Saved Sucessfully!!")
         else:
             return HttpResponse(request, 'create.html', {'form': form})
+
+

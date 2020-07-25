@@ -1,7 +1,7 @@
 {% load static %}
 
   <!DOCTYPE html>
-  <html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
   <head>
 
@@ -16,6 +16,7 @@
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -60,7 +61,6 @@
               <li class="nav-item">
               <a class="nav-link" href="{% url 'blog' %}">Blog Post</a>
             </li>
-
               <li class="nav-item">
               <a class="nav-link" href="{% url 'blog_form' %}">New Story</a>
             </li>
@@ -70,13 +70,10 @@
     </nav>
 
 
-
-
-
     <!-- Main Content -->
  <div class="container">
     <div class="row">
-      <div class="col-md-12 mt-3 left">
+      <div class="col-md-12 mt-4  left-auto">
            {% for post in post_list %}
         <div class="post-preview">
             <h2 class="post-title">
@@ -94,10 +91,29 @@
            {% endfor %}
       </div>
     </div>
-  </div>
-    <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-        </div>
+
+     {% if is_paginated %}
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+          <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in paginator.page_range %}
+          {% if page_obj.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+ </div>
   <hr>
 
     <!-- Footer -->
@@ -140,6 +156,9 @@
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 
     <!-- Custom scripts for this template -->
     <script src="{% static 'js/clean-blog.min.js' %}"></script>
