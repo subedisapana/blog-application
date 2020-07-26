@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from Blog import views
+
 #from django.contrib.auth import views as auth_views
 #from users import views as user_view
 
@@ -31,6 +32,6 @@ urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('form/', views.blog_form, name='blog_form'),
     path('blog/', include('Blog.urls')),
-
-
+    path('signup/', views.signup_view, name='signup_view'),
+    path('login/', views.login_view, name='login_view')
 ]

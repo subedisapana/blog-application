@@ -9,6 +9,7 @@ from django.contrib import messages
 from .form import UserRegisterForm
 
 
+
 def register(request):
 
     if request.method == 'POST':

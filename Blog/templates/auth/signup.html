@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<body>
+
+<div class="container">
+    {% load crispy_forms_tags %}
+    {% block content %}
+        <div class="col-md-9 mt-4  left-auto">
+         <div class="content-section">
+            <form method="POST" action="/signup/">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-2">Signup</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Signup</button>
+                </div>
+
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Already registered?<a class="ml-2" href="{% url 'login_view'  %}">Login</a>
+                </small>
+            </div>
+        </div>
+        </div>
+    {% endblock content %}
+</div>
+</body>
+
+</html>

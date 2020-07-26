@@ -38,9 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'Blog',
 
 ]
+
+
+#AUTH_USER_MODEL = 'Blog.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
