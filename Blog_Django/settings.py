@@ -58,6 +58,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Blog_Django.urls'
 
+LOGIN_REDIRECT_URL = 'blog'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

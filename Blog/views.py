@@ -24,58 +24,15 @@ def blog(request):
 
 
 def signup_view(request):
-    form = SignUpForm()
-
-    if request.method == "POST":
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'You have successfully registered your account:' + user)
-            #login(request, user)
-            return redirect('login_view')
-    #else:
-        #form = SignUpForm()
-    #return render(request, 'auth/signup.html', {'form': form})
-
-    context = {'form': form}
-    return render(request, 'auth/signup.html', context)
-
-
-def login_view(request):
-    if request.method == "POST":
-        username = request.POST.get('email')
-        password1 = request.POST.get('password1')
-
-        user = authenticate(request, username=username, password=password1)
-        print(user)
-        if user is not None:
-            login(request, user)
-            return redirect('homepage')
-        else:
-            messages.info(request, "sorry")
-
-
     context = {}
-    return render(request, 'auth/login.html', context)
-
-    #if request.method == "POST":
-       # username = request.POST.get("username")
-       # password = request.POST.get("password")
-       # print(username)
-        #user = authenticate(request, username=username, password=password)
-        #if user is not None:
-           # login(request, user)
-          #  return redirect('homepage')
-    #context = {}
-    #return render(request, 'auth/login.html', context)
-
-
-
-
-
-
-
+    form = SignUpForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            user = form.save()
+            login(request , user)
+            return render(request, 'blog.html')
+    context['form'] = form
+    return render(request, 'auth/signup.html', context)
 
 # -------------------------------------blog view--------------------------------------------------------
 
@@ -94,6 +51,43 @@ class PostDetail(generic.DetailView):
     template_name = 'blogon_extend.html'
 
 
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['title', 'content']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Post
+    template_name = 'create.html'
+    fields = '__all__'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+
+class PostDeleteView(DeleteView, LoginRequiredMixin, UserPassesTestMixin):
+    model = Post
+    template_name = 'post_delete.html'
+    success_url = '/blog'
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+
 def blog_form(request):
     if request.method == 'GET':
         form = BlogForm()    # obj create, aba yo obj lai template ma pass garni
@@ -103,7 +97,7 @@ def blog_form(request):
         if form.is_valid():
             form.save()
             print("after validation on views", form.cleaned_data) # clean_data vanni attribute ma aayera bascha
-            return HttpResponse("Saved Sucessfully!!")
+            return redirect('/blog')
         else:
             return HttpResponse(request, 'create.html', {'form': form})
 
