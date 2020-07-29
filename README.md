@@ -1,5 +1,4 @@
-
-
+#Blog-Django
 
 **Screenshots of the blog application**
 
@@ -16,11 +15,9 @@
 
 ![ss3e](https://user-images.githubusercontent.com/19777028/88825339-2b295100-d1e7-11ea-999e-b090fe94f3c5.PNG)
 
-
 4)Okay, Lets post our own blog
 
 ![ss4](https://user-images.githubusercontent.com/19777028/88823722-21065300-d1e5-11ea-8e4e-a6905285992f.PNG)
-
 
 5) It's posted.Yayy!!
 
