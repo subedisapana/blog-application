@@ -19,7 +19,7 @@
                 {% csrf_token %}
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-2">Signup</legend>
-                    {{ form|crispy }}
+                    {{ form }}
                 </fieldset>
                 <div class="form-group">
                     <button class="btn btn-outline-info" type="submit">Signup</button>
@@ -28,7 +28,7 @@
             </form>
             <div class="border-top pt-3">
                 <small class="text-muted">
-                    Already registered?<a class="ml-2" href="">Login</a>
+                    Already registered?<a class="ml-2" href="{% url 'login_view' %}">Login</a>
                 </small>
             </div>
         </div>

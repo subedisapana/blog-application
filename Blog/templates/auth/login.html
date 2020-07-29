@@ -10,41 +10,31 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <body>
 
-<div class="container">
-    {% load crispy_forms_tags %}
-    {% block content %}
-        <div class="col-md-9 mt-4  left-auto">
-         <div class="content-section">
-            <form method="POST" action="/login/">
-                {% csrf_token %}
+    <div class="container">
+            <div class="col-md-9 mt-4  left-auto">
+             <div class="content-section">
+                <form method="POST" action="/login/">
+                    {% csrf_token %}
 
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-2">Login</legend>
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-2">Login</legend>
+                        {{ form.username.label }}: {{ form.username }}<br> <br>
+                        {{ form.password.label }}: {{ form.password }}
 
-                    {{ form.username }}
-                    <div id="div_id_username" class="control-group">
-                        <label for="id_username" class="control-label requiredField">Username<span class="asteriskField">*</span> </label>
-                        <div class="controls"> <input type="text" name="username" maxlength="30" autofocus class="textinput textInput" required id="id_username"> </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Login</button>
                     </div>
-                 {{ form.password }}
-                    <div id="div_id_password1" class="control-group">
-                        <label for="id_password1" class="control-label requiredField">Password<span class="asteriskField">*</span> </label>
-                        <div class="controls"> <input type="password" name="password1" autocomplete="new-password" class="textinput textInput" required id="id_password1"> <p id="hint_id_password1" class="help-block">
-                    </div>
-                </fieldset>
-                <div class="form-group">
-                    <button class="btn btn-outline-info" type="submit">Login</button>
-                </div>
-            </form>
-            <div class="border-top pt-3">
-                <small class="text-muted">
-                    Create an account.<a class="ml-2" href="{% url 'signup_view'  %}">Signup</a>
-                </small>
+                </form>
+                 <div class="border-top pt-3">
+                    <small class="text-muted">
+                        Create new account<a class="ml-2" href="{% url 'signup_view' %}">Signup</a>
+                    </small>
+                 </div>
+
+             </div>
             </div>
-        </div>
-        </div>
-    {% endblock content %}
-</div>
+    </div>
 </body>
 
 </html>

@@ -54,11 +54,20 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'Blog_Django.middleware.MyCustomMiddleware',
 ]
 
 ROOT_URLCONF = 'Blog_Django.urls'
 
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'blog'
+
+
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '25986ad013e70d'
+EMAIL_HOST_PASSWORD = 'f3e5476d7a1369'
+EMAIL_PORT = '2525'
+
 
 TEMPLATES = [
     {
@@ -128,3 +137,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

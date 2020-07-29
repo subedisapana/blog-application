@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 urlpatterns = [
-    #
+    #blog/
     path('', views.PostList.as_view(), name='blog'),
     path('<slug:slug>/', views.PostDetail.as_view(), name='blogon_extend'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),

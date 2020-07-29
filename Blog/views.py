@@ -2,16 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from .models import Post
 from .form import BlogForm
-from .form import SignUpForm
+from .form import SignUpForm, ProfileUpdateForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
-from django.urls import reverse
-from django.contrib.auth import authenticate, login, logout
-from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.models import User
 from django.views.generic import (ListView, DetailView, CreateView, UpdateView, DeleteView)
 from django.contrib.auth.decorators import login_required
+# from django. core.mail import send_mail
 
 
 def homepage(request):
@@ -24,15 +21,44 @@ def blog(request):
 
 
 def signup_view(request):
-    context = {}
-    form = SignUpForm(request.POST or None)
     if request.method == "POST":
+        form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request , user)
-            return render(request, 'blog.html')
-    context['form'] = form
-    return render(request, 'auth/signup.html', context)
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}! You can now login.')
+            return redirect('login')
+    else:
+            form = SignUpForm()
+    return render(request, 'auth/signup.html', {'form': form})
+
+
+def login_view(request):
+    return render(request, 'auth/login.html')
+
+
+def logout_view(request):
+    return render(request, 'auth/logout.html')
+
+
+def profile(request):
+    if request.method == 'POST':
+        p_form = ProfileUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.profile)
+        if p_form.is_valid():
+
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
+    else:
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'user/profile.html', context)
+
 
 # -------------------------------------blog view--------------------------------------------------------
 
@@ -90,15 +116,26 @@ class PostDeleteView(DeleteView, LoginRequiredMixin, UserPassesTestMixin):
 
 def blog_form(request):
     if request.method == 'GET':
-        form = BlogForm()    # obj create, aba yo obj lai template ma pass garni
+        form = BlogForm()    # form ob created. and is passed to template
         return render(request, 'create.html', {'form': form})
     else:
         form = BlogForm(request.POST)
         if form.is_valid():
             form.save()
-            print("after validation on views", form.cleaned_data) # clean_data vanni attribute ma aayera bascha
+            print("after validation on views", form.cleaned_data) # Data in clean data
             return redirect('/blog')
         else:
             return HttpResponse(request, 'create.html', {'form': form})
+
+
+# ---------------------------------------------------------------------------------------------------------------
+
+#def blog(request):
+#    subject = "Test"
+#    message = "You have successfully logged in!!"
+#    from_email = "sapana@gmail.com"
+#   recipient = [request.user.email]
+#   send_mail(subject, message, from_email, recipient)
+#   return render(request, 'blog.html')
 
 

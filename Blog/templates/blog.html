@@ -49,14 +49,15 @@
 
 
      <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
       <div class="container">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav ml-md-auto">
             <li class="nav-item">
               <a class="nav-link" href="{% url 'homepage' %}">Home</a>
             </li>
@@ -68,16 +69,15 @@
             </li>
           </ul>
 
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav  navbar-right navbar-expand">
 			<li><a href="#" class="notifications"><i class="fa fa-bell-o"></i><span class="badge">1</span></a></li>
-			<li><a href="#" class="messages"><i class="fa fa-envelope-o"></i><span class="badge">10</span></a></li>
 			<li class="dropdown">
-				<a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar" alt="Avatar"> Paula Wilson <b class="caret"></b></a>
+				<a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><img src="{{ user.profile.image.url }}" class="avatar" alt="Avatar"> {{ user.username }} <b class="caret"></b></a>
 				<ul class="dropdown-menu">
 					<li><a href="#"><i class="fa fa-user-o"></i> Profile</a></li>
 					<li><a href="#"><i class="fa fa-sliders"></i> Settings</a></li>
 					<li class="divider"></li>
-					<li><a href="#"><i class="material-icons">&#xE8AC;</i> Logout</a></li>
+					<li><a href="{% url 'logout_view' %}"><i class="material-icons" >&#xE8AC;</i> Logout</a></li>
 				</ul>
 			</li>
 		</ul>
